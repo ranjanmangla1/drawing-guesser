@@ -17,3 +17,22 @@ h1 {
     transform: translate(-50%, -50%);
     text-align: center;
 }
+
+button {
+    cursor: pointer;
+    margin-top: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    background-color: rgb(23, 142, 240);
+    color: white;
+    border: none;
+}
+
+button:hover {
+    background-color: rgb(12, 155, 217);
+}
+
+button:disabled,button:disabled:hover {
+    background-color: grey;
+    cursor: default;
+}
