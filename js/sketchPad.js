@@ -1,4 +1,4 @@
-class SketchPad {
+ class SketchPad {
     constructor(container, size=400) {
         this.canvas = document.createElement("canvas");
         this.canvas.width = size;
@@ -12,43 +12,64 @@ class SketchPad {
 
         this.ctx = this.canvas.getContext("2d");
 
-        this.path = [];
+        this.paths = [];
         this.isDrawing = false;
 
         // private method
         this.#addEventListener();
     }
 
+    #reset() {
+        this.paths = [];
+        this.isDrawing = false;
+        this.#redraw();
+    }
+
     #addEventListener() {
         this.canvas.onmousedown = (event) => {
             const mouse = this.#getMouse(event);
-            this.path = [mouse];
+            this.paths.push([mouse]);
             this.isDrawing = true;
-            console.log(this.path.length)
+            console.log(this.paths.length)
         } 
 
         // process it only if we are drawing
         this.canvas.onmousemove = (event) => {
-
             if(this.isDrawing) {
                 const mouse = this.#getMouse(event);
-                this.path.push(mouse);
-                console.log(this.path.length)
+                const lastPath = this.paths[this.paths.length - 1];
+                lastPath.push(mouse);
+                console.log(this.paths.length)
                 this.#redraw();
             }
         }
 
-
         this.canvas.onmouseup = () => {
             this.isDrawing = false;
+        }
+
+        // adding support for touch screen
+
+        this.canvas.ontouchstart = (event) => {
+            const loc = event.touches[0];
+            this.canvas.onmousedown(loc);
+        }
+
+        this.canvas.ontouchmove = (event) => {
+            const loc = event.touches[0];
+            this.canvas.onmousemove(loc);
+        }
+
+        this.canvas.ontouchend = () => {
+            this.canvas.onmouseup();
         }
     }
 
     #redraw() {
-        this.ctx.clearRect(0,0, this.canvas.width, this.canvas.height);
-        draw.path(this.ctx, this.path);
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        draw.paths(this.ctx, this.paths);
     }
-
+    
     #getMouse = (event) => {
         // figuring out the coordinates
         const rect = this.canvas.getBoundingClientRect();

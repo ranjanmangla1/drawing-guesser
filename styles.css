@@ -1,12 +1,13 @@
 body, #content {
     font-family: sans-serif;
     background-color: black;
-    color: white;
+    overscroll-behavior: none;
 }
 
 h1 {
     font-size: 3rem;
     font-weight: 800;
+    color: white;
 }
 
 #content {
