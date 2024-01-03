@@ -1,0 +1,13 @@
+body, #content {
+    font-family: sans-serif;
+    background-color: black;
+    color: white;
+}
+
+#content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
