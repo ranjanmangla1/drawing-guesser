@@ -18,12 +18,13 @@
 
         this.paths = [];
         this.isDrawing = false;
+        this.#redraw();
 
         // private method
         this.#addEventListener();
     }
 
-    #reset() {
+    reset() {
         this.paths = [];
         this.isDrawing = false;
         this.#redraw();

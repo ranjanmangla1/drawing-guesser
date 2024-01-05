@@ -20,12 +20,43 @@ h1 {
 
 button {
     cursor: pointer;
-    margin-top: 0.5rem;
+    /* margin-top: 0.5rem; */
     padding: 0.5rem 1rem;
     border-radius: 0.5rem;
     background-color: rgb(23, 142, 240);
     color: white;
     border: none;
+}
+
+#name-input {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+    /* margin: 0; */
+    /* height: 100%; */
+}
+
+span {
+    display: block;
+    color: white;
+    margin-top: 1rem;
+}
+
+#advanceBtn {
+    background-color: rgb(178, 0, 0);
+    border-radius: 0;
+    height: 100%;
+    margin: 0;
+    padding: 0.51rem;
+}
+
+input {
+    padding: 0.5rem 0.5rem;
+    margin: 0;
+    border-radius: 0;
+    border: 0;
 }
 
 button:hover {

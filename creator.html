@@ -9,15 +9,51 @@
 <body>
     <div id="content">
         <h1>Data Creator</h1>
+        <div id="name-input">
+            <input id="student" type="text" placeholder="type your name" />
+            <button id="advanceBtn" onclick="start()">START</button>
+        </div>
+        <span id="instructions"></span>
         <br>
-        <div id="sketchPadContainer"></div>
+        <div id="sketchPadContainer" style="visibility: hidden;"></div>
     </div>
 
     <script src="js/draw.js"></script>
     <script src="js/sketchPad.js"></script>
 
     <script>
+        let index = 0;
+        const labels = ["car", "fish", "house", "tree", "bicycle", "guitar", "pencil", "clock"]
+
+        const data = {
+            student: null,
+            session: new Date().getTime(),
+            drawings: {}
+        }
         const sketchPad = new SketchPad(sketchPadContainer);
+
+        function start() {
+            if(student.value == "") {
+                alert("please type your name first!");
+            }
+
+            data.student = student.value;
+            student.style.display = "none";
+            sketchPadContainer.style.visibility = "visible";
+
+            advanceBtn.innerHTML = labels[index];
+
+            instructions.innerHTML = `Please draw a ${labels[index]}`
+
+            if(index > labels.length - 1){
+                advanceBtn.innerHTML = "Finish";
+                // finish();
+            } else {
+                data.drawings[label] = sketchPad.paths;
+                sketchPad.reset();
+                index++;
+            }
+        }
     </script>
 </body>
 </html>
