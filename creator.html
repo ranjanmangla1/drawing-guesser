@@ -46,12 +46,34 @@
             instructions.innerHTML = `Please draw a ${labels[index]}`
 
             if(index > labels.length - 1){
-                advanceBtn.innerHTML = "Finish";
-                // finish();
+                advanceBtn.innerHTML = "Save & Finish";
+                sketchPadContainer.style.visibility = "hidden";
+                instructions.innerHTML = "Thank you!";
+                advanceBtn.onclick = finish;
             } else {
-                data.drawings[label] = sketchPad.paths;
+                data.drawings[labels[index]] = sketchPad.paths;
                 sketchPad.reset();
                 index++;
+            }
+
+            function finish() {
+                advanceBtn.style.display = 'none';
+
+                instructions.innerHTML = "Take your downloaded file";
+
+                const element = document.createElement('a');
+
+                element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(JSON.stringify(data)));
+
+                const filename = `${data.session}.json`;
+                element.setAttribute('download', filename);
+
+                element.style.display = "none";
+
+                document.body.appendChild(element);
+
+                element.click();
+                document.body.remvoeChild(element);
             }
         }
     </script>
